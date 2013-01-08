@@ -1,4 +1,4 @@
 LIST
 ====
 
-À two directions chained list in C.
+A two directions chained list in C.
