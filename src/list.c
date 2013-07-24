@@ -57,7 +57,7 @@ LIST* LIST_createList() {
 	}
 	lst->head 	  = NULL;
 	lst->tail 	  = NULL;
-	lst->iterator = NULL;
+	lst->iterator     = NULL;
 	lst->size 	  = 0;
 	lst->clear	  = NULL;
 
@@ -96,8 +96,8 @@ void LIST_insertAt( const int pos, Element e, LIST* l ) {
 			newNode->before   = tmp->before;
 			tmp->before->next = newNode;
 			tmp->before 	  = newNode;
-			tmp 			  = NULL;
-			newNode			  = NULL;
+			tmp               = NULL;
+			newNode           = NULL;
 			l->size++;
 		}
 	}
@@ -122,8 +122,8 @@ void LIST_setHead( Element e, LIST* l ) {
 		newNode->before = NULL;
 		l->head->before = newNode;
 		newNode->next 	= l->head;
-		l->head 		= newNode;
-		newNode			= NULL;
+		l->head         = newNode;
+		newNode         = NULL;
 		l->size++;
 	}
 }
@@ -139,8 +139,8 @@ void LIST_setTail( Element e, LIST* l ) {
 		newNode->before = l->tail;
 		l->tail->next	= newNode;
 		newNode->next 	= NULL;
-		l->tail 		= newNode;
-		newNode			= NULL;
+		l->tail         = newNode;
+		newNode         = NULL;
 		l->size++;
 	}
 }
@@ -195,7 +195,7 @@ Element LIST_removeElemAt( const int pos, LIST* l ) {
 			tmp->before->next = tmp->next;
 			tmp->next->before = tmp->before;
 
-			tmp->next 	= NULL;
+			tmp->next   = NULL;
 			tmp->before = NULL;
 		}
 		l->size--;
@@ -243,9 +243,9 @@ void LIST_destroy( LIST* l ) {
 		while( l->size > 0 ) {
 			LIST_deleteElemAt(0, l);
 		}
-		l->head 	= NULL;
-		l->tail 	= NULL;
-		l->size 	= 0;
+		l->head     = NULL;
+		l->tail     = NULL;
+		l->size     = 0;
 		l->iterator = NULL;
 		free( l );
 	}
