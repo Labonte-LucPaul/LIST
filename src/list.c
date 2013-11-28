@@ -4,7 +4,7 @@
  Author      : Luc Paul Labonté
  Date	     : 17-11-2012
  Version     : 1.0
- Copyright   : Copy right 2012
+ Copyright   : Copy right 2012-2014
  Description : A two side ways chained list.
  Licence     : http://creativecommons.org/licenses/by-sa/3.0/deed.en_US
  Repository  : https://github.com/Labonte-LucPaul/LIST
