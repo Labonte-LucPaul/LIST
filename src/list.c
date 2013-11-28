@@ -2,7 +2,7 @@
  ============================================================================
  Name        : List.c
  Author      : Luc Paul Labonté
- Date	     : 17-11-2012
+ Date        : 17-11-2012
  Version     : 1.0
  Copyright   : Copy right 2012-2014
  Description : A two side ways chained list.
