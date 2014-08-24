@@ -1,4 +1,3 @@
-
 /*
  * 		list.h
  *
@@ -66,7 +65,7 @@ LIST* LIST_createList();
  * 		@pre l != NULL
  * 		@post The Element <i>e</i> is added to the list.
  */
-void LIST_insertAt( const int pos, Element e, LIST* l );
+void LIST_insertAt(const int pos, Element e, LIST* l);
 
 /**
  *	@brief Will insert the Element <i>e</i> <b>before</b> the selected position
@@ -80,7 +79,7 @@ void LIST_insertAt( const int pos, Element e, LIST* l );
  * @param l (LIST*) The structure of the list.
  * 		@pre i != NULL
  */
-void LIST_insertBefore( const int pos, Element e, LIST* l );
+void LIST_insertBefore(const int pos, Element e, LIST* l);
 
 /**
  * 	@brief Insert the Element <i>e</i> <b>after</b> the selected position
@@ -93,7 +92,7 @@ void LIST_insertBefore( const int pos, Element e, LIST* l );
  * @param l (LIST*) The structure of the list.
  * 		@pre i != NULL
  */
-void LIST_insertAfter( const int pos, Element e, LIST* l );
+void LIST_insertAfter(const int pos, Element e, LIST* l);
 
 /**
  *  @brief Insert the Element <i>e</i> at the head of the list.
@@ -103,7 +102,7 @@ void LIST_insertAfter( const int pos, Element e, LIST* l );
  * @param l (LIST*) The structure of the list.
  * 		@pre i != NULL
  */
-void LIST_setHead( Element e, LIST* l );
+void LIST_setHead(Element e, LIST* l);
 
 /**
  *  @brief Insert the Element <i>e</i> at the tail of the list.
@@ -113,7 +112,7 @@ void LIST_setHead( Element e, LIST* l );
  * @param l (LIST*) The structure of the list.
  * 		@pre i != NULL
  */
-void LIST_setTail( Element e, LIST* l );
+void LIST_setTail(Element e, LIST* l);
 
 /**
  *  @brief Return the Element at the head of the list.
@@ -123,7 +122,7 @@ void LIST_setTail( Element e, LIST* l );
  * @return (Element) The Element at the beginning of the list.
  * 	@post Use a type cast.
  */
-Element LIST_getHead( LIST* l );
+Element LIST_getHead(LIST* l);
 
 /**
  *  @brief Return the Element at the tail of the list.
@@ -133,7 +132,7 @@ Element LIST_getHead( LIST* l );
  * @return (Element) The Element at the end of the list.
  * 	@post Use a type cast. See example.
  */
-Element LIST_getTail( LIST* l );
+Element LIST_getTail(LIST* l);
 
 /**
  *  @brief Get the Element at the specified position <i>pos</i> of the list.
@@ -145,7 +144,7 @@ Element LIST_getTail( LIST* l );
  * @return (Element) The element at the specified position.
  * 	@post Use a type cast. See example.
  */
-Element LIST_getElemAt( const int pos, LIST* l );
+Element LIST_getElemAt(const int pos, LIST* l);
 
 /**
  *  @brief Remove the Element specified at the position. The pointer to the
@@ -158,7 +157,7 @@ Element LIST_getElemAt( const int pos, LIST* l );
  * 		@pre l != NULL
  * @return (Element) The element removed from the list at the given position.
  */
-Element LIST_removeElemAt( const int pos, LIST* l );
+Element LIST_removeElemAt(const int pos, LIST* l);
 
 /**
  *  @brief Iterator of the LIST. Return the Element at the current iterate
@@ -172,7 +171,7 @@ Element LIST_removeElemAt( const int pos, LIST* l );
  * 		@pre l != NULL
  * @return (Element) The Element where the iterator is pointing.
  */
-Element LIST_iterate( LIST* l );
+Element LIST_iterate(LIST* l);
 
 /**
  *	@brief Initialize the Iterator. It will point to the head of the LIST
@@ -184,7 +183,7 @@ Element LIST_iterate( LIST* l );
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
  */
-void LIST_initIterator( LIST* l );
+void LIST_initIterator(LIST* l);
 
 /**
  * 	@brief Get the size of the list. The number of Element in the list.
@@ -193,7 +192,7 @@ void LIST_initIterator( LIST* l );
  * 		@pre l != NULL
  * @return (int) The number of Element in the lise.
  */
-int LIST_getSize( LIST* l );
+int LIST_getSize(LIST* l);
 
 /**
  * 	@brief Allows the user to set his clear function to destroy the content of
@@ -207,7 +206,7 @@ int LIST_getSize( LIST* l );
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
  */
-void LIST_setClear( void* c, LIST* l );
+void LIST_setClear(void* c, LIST* l);
 
 /**
  * 	@brief Delete from the list the Element at the specified position
@@ -225,7 +224,7 @@ void LIST_setClear( void* c, LIST* l );
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
  */
-void LIST_deleteElemAt( const int pos, LIST* l );
+void LIST_deleteElemAt(const int pos, LIST* l);
 
 /**
  * @brief Delete the entire list. Iterate through the Elements of the list and
@@ -234,67 +233,67 @@ void LIST_deleteElemAt( const int pos, LIST* l );
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
  */
-void LIST_destroy( LIST* l );
+void LIST_destroy(LIST* l);
 
 /**
  * @example
  * 	How to use the list.
  * @code
  *
-#include <stdio.h>
-#include <stdlib.h>
-#include "list.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include "list.h"
 
-void myClear( Element e ) {
+ void myClear( Element e ) {
 	free( e );
 	e = NULL;
-}
-int main( void ) {
+ }
+ int main( void ) {
 
-	char* s1 = "1";
-	char* s2 = "2";
-	char* s3 = "3";
-	char* s4 = "4";
-	char* c1 = "My string!";
+	 char* s1 = "1";
+	 char* s2 = "2";
+	 char* s3 = "3";
+	 char* s4 = "4";
+	 char* c1 = "My string!";
 
-	LIST* lst = LIST_createList();
+	 LIST* lst = LIST_createList();
 
-	LIST_setHead( "First Element", lst );
-	LIST_setTail( "My second Element", lst );
-	LIST_insertAt( 1, s4, lst );
-	LIST_insertAt( 2, s1, lst );
-	LIST_insertAt( 3, s3, lst );
-	LIST_insertAt( 3, s2, lst );
-	LIST_insertAt( 6, c1, lst );
-	LIST_insertAt( 1, (char*) LIST_removeElemAt(5,lst), lst );
-	LIST_insertAt( 5, (char*) LIST_removeElemAt(2,lst), lst );
+	 LIST_setHead( "First Element", lst );
+	 LIST_setTail( "My second Element", lst );
+	 LIST_insertAt( 1, s4, lst );
+	 LIST_insertAt( 2, s1, lst );
+	 LIST_insertAt( 3, s3, lst );
+	 LIST_insertAt( 3, s2, lst );
+	 LIST_insertAt( 6, c1, lst );
+	 LIST_insertAt( 1, (char*) LIST_removeElemAt(5,lst), lst );
+	 LIST_insertAt( 5, (char*) LIST_removeElemAt(2,lst), lst );
 
-	LIST_initIterator( lst );
+	 LIST_initIterator( lst );
 
-	printf( "Nb Elements: %d\n", LIST_getSize(lst) );
-	char* tmp;
-	int i = 0;
-	while( (tmp = (char*) LIST_iterate(lst)) != NULL ) {
-		printf( "%d: %s\n", i, tmp );
-		++i;
-	}
+	 printf( "Nb Elements: %d\n", LIST_getSize(lst) );
+	 char* tmp;
+	 int i = 0;
+	 while( (tmp = (char*) LIST_iterate(lst)) != NULL ) {
+		 printf( "%d: %s\n", i, tmp );
+		 ++i;
+	 }
 
-	LIST_setClear( myClear, lst );
+	 LIST_setClear( myClear, lst );
 
-	LIST_destroy( lst );
+	 LIST_destroy( lst );
 
-	return 0;
-}
+	 return 0;
+ }
 
-Result:
-Nb Elements: 7
-0: First Element
-1: My second Element
-2: 1
-3: 2
-4: 3
-5: 4
-6: My string!
+ Result:
+ Nb Elements: 7
+ 0: First Element
+ 1: My second Element
+ 2: 1
+ 3: 2
+ 4: 3
+ 5: 4
+ 6: My string!
  * @endcode
  */
 
