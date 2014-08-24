@@ -46,15 +46,24 @@ struct _list {
 
 	/// @brief A function pointer provided by the user to custum clear the Element structure data.
 	void (*clear)(Element);
+
+	/// @brief A function pointer provided by the user to custom errors handling (e.g.: Print error messages).
+	void (*exception)(char*);
 };
+
+void LIST_exceptionHandler(char* msg, LIST* l) {
+	if (l->exception != NULL) {
+		l->exception(msg);
+	}
+}
 
 LIST* LIST_createList() {
 
 	LIST* lst = (LIST*) malloc(sizeof(LIST));
-
 	if ( NULL == lst) {
 		return NULL;
 	}
+
 	lst->head = NULL;
 	lst->tail = NULL;
 	lst->iterator = NULL;
@@ -68,7 +77,18 @@ void LIST_insertAt(const int pos, Element e, LIST* l) {
 
 	if (l != NULL) {
 		if (l->size == 0) {
-			Node* newNode = (Node*) malloc(sizeof(Node));// TODO NULL verification.
+			Node* newNode = (Node*) malloc(sizeof(Node));
+#ifdef FORCE_NULL
+			free( newNode );
+			newNode = NULL;
+#endif
+			if ( NULL == newNode) {
+				LIST_exceptionHandler(
+						"Error creating new Node: list.c->LIST_insertAt ; l->size == 0:newNode is NULL.",
+						l);
+				return;
+			}
+
 			newNode->elem = e;
 			newNode->next = NULL;
 			newNode->before = NULL;
@@ -90,7 +110,14 @@ void LIST_insertAt(const int pos, Element e, LIST* l) {
 			for (i = 0; i < pos && i < l->size; ++i) {
 				tmp = tmp->next;
 			}
-			Node* newNode = (Node*) malloc(sizeof(Node));// TODO NULL verification
+			Node* newNode = (Node*) malloc(sizeof(Node));
+			if ( NULL == newNode) {
+				LIST_exceptionHandler(
+						"Error creating new Node: list.c->LIST_insertAt ; else:newNode is NULL.",
+						l);
+				return;
+			}
+
 			newNode->elem = e;
 			newNode->next = tmp;
 			newNode->before = tmp->before;
@@ -116,7 +143,17 @@ void LIST_setHead(Element e, LIST* l) {
 	if (l->size == 0) {
 		LIST_insertAt(0, e, l);
 	} else {
-		Node* newNode = (Node*) malloc(sizeof(Node));// TODO NULL verification
+		Node* newNode = (Node*) malloc(sizeof(Node));
+#ifdef FORCE_NULL
+		free( newNode );
+		newNode = NULL;
+#endif
+		if ( NULL == newNode) {
+			LIST_exceptionHandler(
+					"Error creating new Node: list.c->LIST_setHead ; newNode is NULL.",
+					l);
+			return;
+		}
 
 		newNode->elem = e;
 		newNode->before = NULL;
@@ -133,7 +170,13 @@ void LIST_setTail(Element e, LIST* l) {
 	if (l->size == 0) {
 		LIST_insertAt(0, e, l);
 	} else {
-		Node* newNode = (Node*) malloc(sizeof(Node));// TODO NULL verification
+		Node* newNode = (Node*) malloc(sizeof(Node));
+		if ( NULL == newNode) {
+			LIST_exceptionHandler(
+					"Error creating new Node: list.c->LIST_setTail ; newNode is NULL.",
+					l);
+			return;
+		}
 
 		newNode->elem = e;
 		newNode->before = l->tail;
@@ -237,6 +280,10 @@ void LIST_setClear(void* c, LIST* l) {
 	l->clear = c;
 }
 
+void LIST_setErrorHandler(void* e, LIST* l) {
+	l->exception = e;
+}
+
 void LIST_destroy(LIST* l) {
 	if (l != NULL && l->size > 0) {
 		LIST_initIterator(l);
@@ -247,6 +294,9 @@ void LIST_destroy(LIST* l) {
 		l->tail = NULL;
 		l->size = 0;
 		l->iterator = NULL;
+		l->clear = NULL;
+		l->exception = NULL;
+
 		free(l);
 	}
 }

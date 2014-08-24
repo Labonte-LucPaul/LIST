@@ -10,6 +10,8 @@
 #ifndef LIST_H_
 #define LIST_H_
 
+//#define FORCE_NULL
+
 /**
  * @defgroup mod_list list.h
  * @file list.h
@@ -202,11 +204,19 @@ int LIST_getSize(LIST* l);
  *
  * 	@warning THE USE OF THIS FUNCTION IS YOUR OWN RISK.
  *
- * @param c (void*) The name of your function.
+ * @param c (void*)(Element) The name of your function.
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
  */
 void LIST_setClear(void* c, LIST* l);
+
+/**
+ * 	@brief Allows the user to set a function for handling errors.
+ * @param e (void*)(char*) The function to execute when an error occurs. Takes a char* param.
+ * @param l (LIST*) The structure of the list.
+ * 		@pre l != NULL
+ */
+void LIST_setErrorHandler(void* e, LIST* l);
 
 /**
  * 	@brief Delete from the list the Element at the specified position
@@ -229,6 +239,7 @@ void LIST_deleteElemAt(const int pos, LIST* l);
 /**
  * @brief Delete the entire list. Iterate through the Elements of the list and
  * 		  use the function <b>free()</b> to clear the memory.
+ * 		  Also clear the function pointers.
  *
  * @param l (LIST*) The strucutre of the list.
  * 		@pre l != NULL
